@@ -5,11 +5,11 @@
 [![Play in browser](https://img.shields.io/badge/Play%20in%20browser-087e8b?style=for-the-badge)](https://triple6xseven.github.io/Akvarium/)
 [![Download offline HTML](https://img.shields.io/badge/Download%20offline%20HTML-172a3a?style=for-the-badge)](https://github.com/triple6xseven/Akvarium/releases/latest/download/Akvarium.html)
 
-## Akvarium 1K
+## Akvarium 2K
 
-[![Watch Akvarium 1K](https://img.shields.io/badge/Watch%20Akvarium%201K-225466?style=for-the-badge)](https://triple6xseven.github.io/Akvarium/Akvarium-1K.html)
+[![Watch Akvarium 2K](https://img.shields.io/badge/Watch%20Akvarium%202K-225466?style=for-the-badge)](https://triple6xseven.github.io/Akvarium/Akvarium-1K.html)
 
-A separate **1,279-byte** WebGL 2 experiment. One shader generates a vertical flythrough with rocky walls, drifting fish silhouettes, and blue haze. Open the link to watch or save [the HTML file](Akvarium-1K.html) and open it offline.
+A separate **1,965-byte** WebGL 2 experiment. One shader generates a vertical flythrough through an open reef with individual boulders, animated caustics, fish silhouettes, and blue haze. Open the link to watch or save [the HTML file](Akvarium-1K.html) and open it offline.
 
 ## Start a dive
 
