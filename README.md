@@ -5,11 +5,21 @@
 [![Play in browser](https://img.shields.io/badge/Play%20in%20browser-087e8b?style=for-the-badge)](https://triple6xseven.github.io/Akvarium/)
 [![Download offline HTML](https://img.shields.io/badge/Download%20offline%20HTML-172a3a?style=for-the-badge)](https://github.com/triple6xseven/Akvarium/releases/latest/download/Akvarium.html)
 
-## Akvarium 2K
+## Two ways to dive
 
-[![Watch Akvarium 2K](https://img.shields.io/badge/Watch%20Akvarium%202K-225466?style=for-the-badge)](https://triple6xseven.github.io/Akvarium/Akvarium-1K.html)
+### Akvarium · Full edition
 
-A separate **1,965-byte** WebGL 2 experiment. One shader generates a vertical flythrough through an open reef with individual boulders, animated caustics, fish silhouettes, and blue haze. Open the link to watch or save [the HTML file](Akvarium-1K.html) and open it offline.
+**60,452 bytes (59.0 KiB)** · [Play in browser](https://triple6xseven.github.io/Akvarium/)
+
+<img src="screenshots/akvarium.jpg" alt="Akvarium: a whale crosses above the kelp canyon" width="720">
+
+### Akvarium Mini
+
+**13,393 bytes (13.1 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-1K.html) · [Mini branch](https://github.com/triple6xseven/Akvarium/tree/mini)
+
+A vertical, looping flythrough through the kelp canyon, with a whale passing overhead. It runs from one self-contained HTML file in current WebGL browsers. [View the HTML file](Akvarium-1K.html) or save it to watch offline.
+
+<img src="screenshots/akvarium-mini.jpg" alt="Akvarium Mini: a portrait flythrough under a whale" width="320">
 
 ## Start a dive
 
