@@ -22,8 +22,8 @@ body.film header,body.film footer{visibility:hidden}
 button[aria-pressed=true]{background:#195365}
 </style>
 <canvas aria-label="Explorable underwater world"></canvas>
-<header><div><strong>Quiet Depths</strong><span id="location">Turquoise Canyon</span></div><div id="readout"><div id="depth"></div><span id="survey"></span><span id="coins"></span><span id="size">60407 bytes</span></div></header>
-<footer><span id="keys">WASD · Swim　 Left-click · Look　 Right-click · Free cursor</span><span id="touch"><button data-move="KeyW">Forward</button><button data-move="KeyS">Back</button><button data-move="Space">Rise</button><button data-move="KeyC">Dive</button></span><span><select id="destination" aria-label="Dive location"><option value="">Dive sites</option><option value="kelp">Kelp Forest</option><option value="tail">Stone Fluke</option><option value="wreck">Shipwreck</option><option value="grotto">Jellyfish Grotto</option><option value="vents">Vent Field</option><option value="forum">Sunken Forum</option></select> <button id="fullscreen" aria-label="Fullscreen">⛶</button> <button id="reset">Restart</button></span><span id="gear"><button id="sonar" title="Q">Sonar</button> <button id="lamp" title="L" aria-pressed="false">Lamp</button> <button id="cinema" title="M" aria-pressed="false">Cinema</button> <button id="film" title="V">Flythrough</button> <details id="help">
+<header><div><strong>Quiet Depths</strong><span id="location">Turquoise Canyon</span></div><div id="readout"><div id="depth"></div><span id="survey"></span><span id="coins"></span><span id="size">60482 bytes</span></div></header>
+<footer><span id="keys">WASD · Swim　 Left-click · Look　 Right-click · Free cursor</span><span id="touch"><button data-move="KeyW">Forward</button><button data-move="KeyS">Back</button><button data-move="Space">Rise</button><button data-move="KeyC">Dive</button></span><span><select id="destination" aria-label="Dive location"><option value="">Dive sites</option><option value="kelp">Kelp Forest</option><option value="tail">Stone Fluke</option><option value="wreck">Shipwreck</option><option value="grotto">Jellyfish Grotto</option><option value="vents">Vent Field</option><option value="forum">Sunken Forum</option></select> <button id="fullscreen" aria-label="Fullscreen">⛶</button> <button id="reset">Restart</button></span><span id="gear"><button id="sonar" title="Q">Sonar</button> <button id="lamp" title="L" aria-pressed="false">Lamp</button> <button id="cinema" title="M / Ь" aria-pressed="true">M / Ь · Cinema</button> <button id="film" title="V">Flythrough</button> <details id="help">
 <summary>Controls</summary>
 <dl>
 <dt>WASD / arrows</dt><dd>Swim</dd>
@@ -36,7 +36,7 @@ button[aria-pressed=true]{background:#195365}
 <dt>H</dt><dd>Toggle HUD</dd>
 <dt>L</dt><dd>Toggle lamp</dd>
 <dt>Q</dt><dd>Sonar pulse</dd>
-<dt>M</dt><dd>Toggle Cinema camera</dd>
+<dt>M / Ь</dt><dd>Toggle Cinema camera (on by default)</dd>
 <dt>V</dt><dd>Start or stop Flythrough</dd>
 <dt>Esc</dt><dd>Stop Flythrough</dd>
 </dl></details></span></footer>
@@ -994,7 +994,8 @@ function ocean() {
   let lampOn=false,pulse=null,filmClock=0,filmActive=false;
   const entryFade=.42;
   const cinemaButton=document.querySelector('#cinema');
-  let cinemaOn=false,viewYaw=yaw,viewPitch=pitch,lens=1.56;
+  let cinemaOn=true,viewYaw=yaw,viewPitch=pitch,lens=1.71;
+  document.body.classList.add('cinema');
   function cinemaToggle(){
     cinemaOn=!cinemaOn;
     cinemaButton.setAttribute('aria-pressed',String(cinemaOn));

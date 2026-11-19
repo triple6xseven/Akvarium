@@ -9,16 +9,16 @@
 
 ### Akvarium · Full edition
 
-**60,407 bytes (59.0 KiB)** · [Play in browser](https://triple6xseven.github.io/Akvarium/)
+**60,482 bytes (59.1 KiB)** · [Play in browser](https://triple6xseven.github.io/Akvarium/)
 
 <img src="screenshots/akvarium.jpg" alt="Akvarium: a whale crosses above the kelp canyon" width="720">
 
 ### Akvarium Mini
 
-- **Fullscreen, 13,894 bytes (13.6 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-1K.html) · [HTML file](Akvarium-1K.html)
-- **Portrait 9:16, 13,927 bytes (13.6 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-9x16.html) · [HTML file](Akvarium-9x16.html)
+- **Fullscreen, 15,860 bytes (15.5 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-1K.html) · [HTML file](Akvarium-1K.html)
+- **Portrait 9:16, 15,893 bytes (15.5 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-9x16.html) · [HTML file](Akvarium-9x16.html)
 
-A looping flythrough through the kelp canyon, with a whale passing overhead. Each layout runs from one self-contained HTML file. Press **F** or click **Fullscreen** for browser fullscreen. The [Mini branch](https://github.com/triple6xseven/Akvarium/tree/mini) opens the fullscreen layout by default.
+A looping flythrough through the kelp canyon, with a whale passing overhead. Click **Explore** or press **V** to fly freely. Move with **WASD / arrows**, rise or dive with **Space / C**, and drag to look around. Touchscreens get on-screen movement controls. Press **V** again to return to the flythrough. Each layout runs from one self-contained HTML file. Press **F** or click **Fullscreen** for browser fullscreen. The [Mini branch](https://github.com/triple6xseven/Akvarium/tree/mini) opens the fullscreen layout by default.
 
 <img src="screenshots/akvarium-mini.jpg" alt="Akvarium Mini fullscreen" width="720"> <img src="screenshots/akvarium-mini-9x16.jpg" alt="Akvarium Mini portrait, 9:16" width="260">
 
@@ -31,7 +31,7 @@ A looping flythrough through the kelp canyon, with a whale passing overhead. Eac
 
 ## What’s underwater
 
-- **Cinematic cameras:** press **V** for a guided tour that opens with a whale crossing overhead. Press **M** to keep control of the dive with smoother camera turns, a narrower frame, and a subtle vignette.
+- **Cinematic cameras:** press **V** for a guided tour that opens with a whale crossing overhead. The manual Cinema camera starts enabled, with smoother turns, a narrower frame, and a subtle vignette. Press **M / Ь** to toggle it.
 - **Swim physics:** slow acceleration, coasting, gentle currents, separate rise and dive controls, and collision with terrain and rocks.
 - **Procedural shaders:** animated surface reflections and caustics, soft shadow mapping, shafts of sunlight, and depth-dependent haze.
 - **Six dive sites:** kelp forest, stone whale fluke, shipwreck, jellyfish grotto, hydrothermal vents, and a sunken Roman forum with a mosaic floor.
@@ -52,6 +52,6 @@ The in-game **Controls** button opens the full list.
 - **H** — toggle the HUD.
 - **L** — toggle the dive lamp.
 - **Q** — send a sonar pulse.
-- **M** — toggle the manual Cinema camera.
+- **M / Ь** — toggle the manual Cinema camera (on by default).
 - **V** — start or stop Flythrough.
 - **Esc** — also exits Flythrough. The browser handles exiting fullscreen with Esc.
