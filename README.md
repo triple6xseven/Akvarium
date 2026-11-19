@@ -1,7 +1,7 @@
 # Akvarium Mini
 
-- **Fullscreen, 13,894 bytes (13.6 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-1K.html) · [Default HTML](index.html)
-- **Portrait 9:16, 13,927 bytes (13.6 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-9x16.html) · [Portrait HTML](Akvarium-9x16.html)
+- **Fullscreen, 15,860 bytes (15.5 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-1K.html) · [Default HTML](index.html)
+- **Portrait 9:16, 15,893 bytes (15.5 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-9x16.html) · [Portrait HTML](Akvarium-9x16.html)
 
 A looping underwater flythrough through a kelp canyon. A whale passes overhead as the camera rises off the reef. Each layout runs from a single HTML file with no external assets.
 
