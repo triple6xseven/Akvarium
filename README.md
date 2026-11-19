@@ -5,6 +5,6 @@
 
 A looping underwater flythrough through a kelp canyon. A whale passes overhead as the camera rises off the reef. Each layout runs from a single HTML file with no external assets.
 
-<img src="screenshots/akvarium-mini.jpg" alt="Akvarium Mini in fullscreen" width="720"> <img src="screenshots/akvarium-mini-9x16.jpg" alt="Akvarium Mini in 9:16 portrait" width="260">
+<img src="screenshots/akvarium-mini.jpg" alt="Akvarium Mini in fullscreen" width="720">
 
 Open either link to watch. Press **F** or click **Fullscreen** for browser fullscreen. For offline playback, save the HTML file and open it in a current browser with WebGL enabled. [See the full interactive edition](https://github.com/triple6xseven/Akvarium/tree/main).
