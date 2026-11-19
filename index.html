@@ -22,14 +22,14 @@ body.film header,body.film footer{visibility:hidden}
 button[aria-pressed=true]{background:#195365}
 </style>
 <canvas aria-label="Explorable underwater world"></canvas>
-<header><div><strong>Quiet Depths</strong><span id="location">Turquoise Canyon</span></div><div id="readout"><div id="depth"></div><span id="survey"></span><span id="coins"></span><span id="size">60452 bytes</span></div></header>
-<footer><span id="keys">WASD · Swim　 Mouse · Look　 Left-click · Capture　 Right-click · Release</span><span id="touch"><button data-move="KeyW">Forward</button><button data-move="KeyS">Back</button><button data-move="Space">Rise</button><button data-move="KeyC">Dive</button></span><span><select id="destination" aria-label="Dive location"><option value="">Dive sites</option><option value="kelp">Kelp Forest</option><option value="tail">Stone Fluke</option><option value="wreck">Shipwreck</option><option value="grotto">Jellyfish Grotto</option><option value="vents">Vent Field</option><option value="forum">Sunken Forum</option></select> <button id="fullscreen" aria-label="Fullscreen">⛶</button> <button id="reset">Restart</button></span><span id="gear"><button id="sonar" title="Q">Sonar</button> <button id="lamp" title="L" aria-pressed="false">Lamp</button> <button id="cinema" title="M" aria-pressed="false">Cinema</button> <button id="film" title="V">Flythrough</button> <details id="help">
+<header><div><strong>Quiet Depths</strong><span id="location">Turquoise Canyon</span></div><div id="readout"><div id="depth"></div><span id="survey"></span><span id="coins"></span><span id="size">60407 bytes</span></div></header>
+<footer><span id="keys">WASD · Swim　 Left-click · Look　 Right-click · Free cursor</span><span id="touch"><button data-move="KeyW">Forward</button><button data-move="KeyS">Back</button><button data-move="Space">Rise</button><button data-move="KeyC">Dive</button></span><span><select id="destination" aria-label="Dive location"><option value="">Dive sites</option><option value="kelp">Kelp Forest</option><option value="tail">Stone Fluke</option><option value="wreck">Shipwreck</option><option value="grotto">Jellyfish Grotto</option><option value="vents">Vent Field</option><option value="forum">Sunken Forum</option></select> <button id="fullscreen" aria-label="Fullscreen">⛶</button> <button id="reset">Restart</button></span><span id="gear"><button id="sonar" title="Q">Sonar</button> <button id="lamp" title="L" aria-pressed="false">Lamp</button> <button id="cinema" title="M" aria-pressed="false">Cinema</button> <button id="film" title="V">Flythrough</button> <details id="help">
 <summary>Controls</summary>
 <dl>
 <dt>WASD / arrows</dt><dd>Swim</dd>
-<dt>Mouse / touch drag</dt><dd>Look around</dd>
+<dt>Captured mouse / touch drag</dt><dd>Look around</dd>
 <dt>Left-click</dt><dd>Capture cursor</dd>
-<dt>Right-click / Esc</dt><dd>Release cursor</dd>
+<dt>Right-click / Esc</dt><dd>Release cursor and stop mouse look</dd>
 <dt>Space / C</dt><dd>Rise / dive</dd>
 <dt>Shift</dt><dd>Swim faster</dd>
 <dt>F</dt><dd>Toggle fullscreen</dd>
@@ -935,8 +935,8 @@ function ocean() {
 
   const keys=new Set();
   const controls=['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space','KeyC','ShiftLeft','ShiftRight'];
-  let eye,velocity,yaw,pitch,drag=null,mouse=null;
-  function reset(){eye=[0,-10,9];velocity=[0,0,0];yaw=-.09;pitch=-.21;mouse=null;}
+  let eye,velocity,yaw,pitch,drag=null,releasingMouse=false;
+  function reset(){eye=[0,-10,9];velocity=[0,0,0];yaw=-.09;pitch=-.21;}
   const fullscreenButton=document.querySelector('#fullscreen');
   async function toggleFullscreen(){
     try{
@@ -948,7 +948,6 @@ function ocean() {
   }
   fullscreenButton.addEventListener('click',toggleFullscreen);
   document.addEventListener('fullscreenchange',()=>{
-    mouse=null;
     fullscreenButton.setAttribute('aria-pressed',String(Boolean(document.fullscreenElement)));
   });
   reset();
@@ -1023,7 +1022,6 @@ function ocean() {
     pitch=viewPitch;
     keys.clear();
     velocity=[0,0,0];
-    mouse=null;
     document.body.classList.toggle('film',filmActive);
     stopFilm.hidden=!filmActive;
     cut.style.opacity='0';
@@ -1075,7 +1073,6 @@ function ocean() {
     velocity=[0,0,0];
     yaw=viewYaw=dive.heading;
     pitch=viewPitch=-.16;
-    mouse=null;
     keys.clear();
     destination.value='';
     destination.blur();
@@ -1111,12 +1108,15 @@ function ocean() {
     event.preventDefault();keys.add(event.code);
   });
   addEventListener('keyup',event=>keys.delete(event.code));
-  addEventListener('blur',()=>{keys.clear();drag=null;mouse=null;});
+  addEventListener('blur',()=>{keys.clear();drag=null;});
   canvas.addEventListener('contextmenu',event=>event.preventDefault());
   // Listen for mouse buttons individually, even while another button is held.
   canvas.addEventListener('mousedown',event=>{
     if(event.button===2&&document.pointerLockElement===canvas){
       event.preventDefault();
+      releasingMouse=true;
+      yaw=viewYaw;
+      pitch=viewPitch;
       document.exitPointerLock();
     }
   });
@@ -1141,12 +1141,7 @@ function ocean() {
   }
   canvas.addEventListener('pointermove',event=>{
     if(event.pointerType==='mouse'){
-      if(document.pointerLockElement===canvas){
-        look(event.movementX,event.movementY);
-      }else{
-        if(mouse)look(event.clientX-mouse.x,event.clientY-mouse.y);
-        mouse={x:event.clientX,y:event.clientY};
-      }
+      if(document.pointerLockElement===canvas&&!releasingMouse)look(event.movementX,event.movementY);
       return;
     }
     if(drag?.id!==event.pointerId)return;
@@ -1154,8 +1149,13 @@ function ocean() {
     drag.x=event.clientX;
     drag.y=event.clientY;
   });
-  canvas.addEventListener('pointerleave',()=>{mouse=null;});
-  document.addEventListener('pointerlockchange',()=>{mouse=null;});
+  document.addEventListener('pointerlockchange',()=>{
+    releasingMouse=false;
+    if(document.pointerLockElement!==canvas&&!filmActive){
+      yaw=viewYaw;
+      pitch=viewPitch;
+    }
+  });
   canvas.addEventListener('lostpointercapture',event=>{if(drag?.id===event.pointerId)drag=null;});
   document.querySelectorAll('[data-move]').forEach(button=>{
     button.addEventListener('pointerdown',event=>{button.setPointerCapture(event.pointerId);keys.add(button.dataset.move);});

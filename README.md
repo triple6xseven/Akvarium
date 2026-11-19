@@ -9,17 +9,18 @@
 
 ### Akvarium · Full edition
 
-**60,452 bytes (59.0 KiB)** · [Play in browser](https://triple6xseven.github.io/Akvarium/)
+**60,407 bytes (59.0 KiB)** · [Play in browser](https://triple6xseven.github.io/Akvarium/)
 
 <img src="screenshots/akvarium.jpg" alt="Akvarium: a whale crosses above the kelp canyon" width="720">
 
 ### Akvarium Mini
 
-**13,393 bytes (13.1 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-1K.html) · [Mini branch](https://github.com/triple6xseven/Akvarium/tree/mini)
+- **Fullscreen, 13,894 bytes (13.6 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-1K.html) · [HTML file](Akvarium-1K.html)
+- **Portrait 9:16, 13,927 bytes (13.6 KiB)** · [Watch in browser](https://triple6xseven.github.io/Akvarium/Akvarium-9x16.html) · [HTML file](Akvarium-9x16.html)
 
-A vertical, looping flythrough through the kelp canyon, with a whale passing overhead. It runs from one self-contained HTML file in current WebGL browsers. [View the HTML file](Akvarium-1K.html) or save it to watch offline.
+A looping flythrough through the kelp canyon, with a whale passing overhead. Each layout runs from one self-contained HTML file. Press **F** or click **Fullscreen** for browser fullscreen. The [Mini branch](https://github.com/triple6xseven/Akvarium/tree/mini) opens the fullscreen layout by default.
 
-<img src="screenshots/akvarium-mini.jpg" alt="Akvarium Mini: a portrait flythrough under a whale" width="320">
+<img src="screenshots/akvarium-mini.jpg" alt="Akvarium Mini fullscreen" width="720"> <img src="screenshots/akvarium-mini-9x16.jpg" alt="Akvarium Mini portrait, 9:16" width="260">
 
 ## Start a dive
 
@@ -42,9 +43,9 @@ A vertical, looping flythrough through the kelp canyon, with a whale passing ove
 The in-game **Controls** button opens the full list.
 
 - **WASD / arrow keys** — swim forward, backward, and sideways.
-- **Mouse / touch drag** — look around.
+- **Captured mouse / touch drag** — look around.
 - **Left-click the water** — capture the mouse for continuous looking.
-- **Right-click / Esc** — free the cursor to use the HUD.
+- **Right-click / Esc** — free the cursor to use the HUD. Moving the free cursor leaves the view direction fixed.
 - **Space / C** — rise / dive.
 - **Shift** — swim faster while held.
 - **F** — toggle fullscreen.
