@@ -9,7 +9,7 @@
 
 ### Akvarium · Full edition
 
-**60,482 bytes (59.1 KiB)** · [Play in browser](https://triple6xseven.github.io/Akvarium/)
+**62,865 bytes (61.4 KiB)** · [Play in browser](https://triple6xseven.github.io/Akvarium/)
 
 <img src="screenshots/akvarium.jpg" alt="Akvarium: a whale crosses above the kelp canyon" width="720">
 
@@ -52,6 +52,8 @@ The in-game **Controls** button opens the full list.
 - **H** — toggle the HUD.
 - **L** — toggle the dive lamp.
 - **Q** — send a sonar pulse.
+- **R** — reset the coin hunt at the current locations.
+- **T** — shuffle all 12 coins across six dive sites and restart the hunt.
 - **M / Ь** — toggle the manual Cinema camera (on by default).
 - **V** — start or stop Flythrough.
 - **Esc** — also exits Flythrough. The browser handles exiting fullscreen with Esc.

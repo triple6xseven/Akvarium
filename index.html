@@ -22,8 +22,8 @@ body.film header,body.film footer{visibility:hidden}
 button[aria-pressed=true]{background:#195365}
 </style>
 <canvas aria-label="Explorable underwater world"></canvas>
-<header><div><strong>Quiet Depths</strong><span id="location">Turquoise Canyon</span></div><div id="readout"><div id="depth"></div><span id="survey"></span><span id="coins"></span><span id="size">60482 bytes</span></div></header>
-<footer><span id="keys">WASD · Swim　 Left-click · Look　 Right-click · Free cursor</span><span id="touch"><button data-move="KeyW">Forward</button><button data-move="KeyS">Back</button><button data-move="Space">Rise</button><button data-move="KeyC">Dive</button></span><span><select id="destination" aria-label="Dive location"><option value="">Dive sites</option><option value="kelp">Kelp Forest</option><option value="tail">Stone Fluke</option><option value="wreck">Shipwreck</option><option value="grotto">Jellyfish Grotto</option><option value="vents">Vent Field</option><option value="forum">Sunken Forum</option></select> <button id="fullscreen" aria-label="Fullscreen">⛶</button> <button id="reset">Restart</button></span><span id="gear"><button id="sonar" title="Q">Sonar</button> <button id="lamp" title="L" aria-pressed="false">Lamp</button> <button id="cinema" title="M / Ь" aria-pressed="true">M / Ь · Cinema</button> <button id="film" title="V">Flythrough</button> <details id="help">
+<header><div><strong>Quiet Depths</strong><span id="location">Turquoise Canyon</span></div><div id="readout"><div id="depth"></div><span id="survey"></span><span id="coins"></span><span id="size">62865 bytes</span></div></header>
+<footer><span id="keys">WASD · Swim　 Left-click · Look　 Right-click · Free cursor</span><span id="touch"><button data-move="KeyW">Forward</button><button data-move="KeyS">Back</button><button data-move="Space">Rise</button><button data-move="KeyC">Dive</button></span><span><select id="destination" aria-label="Dive location"><option value="">Dive sites</option><option value="kelp">Kelp Forest</option><option value="tail">Stone Fluke</option><option value="wreck">Shipwreck</option><option value="grotto">Jellyfish Grotto</option><option value="vents">Vent Field</option><option value="forum">Sunken Forum</option></select> <button id="fullscreen" aria-label="Fullscreen">⛶</button> <button id="reset">Restart</button></span><span id="gear"><button id="sonar" title="Q">Sonar</button> <button id="lamp" title="L" aria-pressed="false">Lamp</button> <button id="cinema" title="M / Ь" aria-pressed="true">M / Ь · Cinema</button> <button id="film" title="V">Flythrough</button> <button id="shuffle" title="Randomize coin locations">T · Shuffle coins</button> <details id="help">
 <summary>Controls</summary>
 <dl>
 <dt>WASD / arrows</dt><dd>Swim</dd>
@@ -36,6 +36,8 @@ button[aria-pressed=true]{background:#195365}
 <dt>H</dt><dd>Toggle HUD</dd>
 <dt>L</dt><dd>Toggle lamp</dd>
 <dt>Q</dt><dd>Sonar pulse</dd>
+<dt>R</dt><dd>Reset the coin hunt</dd>
+<dt>T</dt><dd>Randomize coin locations</dd>
 <dt>M / Ь</dt><dd>Toggle Cinema camera (on by default)</dd>
 <dt>V</dt><dd>Start or stop Flythrough</dd>
 <dt>Esc</dt><dd>Stop Flythrough</dd>
@@ -963,22 +965,64 @@ function ocean() {
   const landmarks=Object.values(dives);
   const visited=new Set();
   const coinReadout=document.querySelector('#coins'),coinNote=document.querySelector('#coin-note');
-  const saveKey='quiet-depths-coins-v1';
+  const saveKey='quiet-depths-coins-v1',layoutKey='quiet-depths-coin-layout-v1';
   const collected=new Set();
   try{
+    const layout=JSON.parse(localStorage.getItem(layoutKey)??'null');
+    if(Array.isArray(layout)&&layout.length===coins.length&&layout.every(point=>
+      Array.isArray(point)&&point.length===3&&point.every(Number.isFinite)&&point[1]<-.65)){
+      coins.splice(0,coins.length,...layout);
+    }
     const saved=JSON.parse(localStorage.getItem(saveKey)??'[]');
     if(Array.isArray(saved))for(const index of saved){
       if(Number.isInteger(index)&&index>=0&&index<coins.length)collected.add(index);
     }
   }catch{}
   let noteUntil=0;
+  const resetBlocked=new Set();
   function displayCoins(){
     coinReadout.textContent=collected.size+' found · '+(coins.length-collected.size)+' left';
   }
   displayCoins();
+  function shuffleCoins(){
+    const next=[];
+    const separated=(x,z,points,gap)=>points.every(p=>Math.hypot(p[0]-x,p[2]-z)>gap);
+    for(const {center:[cx,cz]} of landmarks){
+      const target=next.length+2;
+      for(let attempt=0;attempt<240&&next.length<target;attempt++){
+        const angle=Math.random()*2*Math.PI, radius=3+Math.random()*7;
+        const x=cx+Math.cos(angle)*radius,z=cz+Math.sin(angle)*radius;
+        const y=floor(x,z)+2.55+Math.random()*.45;
+        if(y> -1.25||!separated(x,z,next,2.6)||!separated(x,z,coins,1.2))continue;
+        if(Math.abs(x+15)<12.2&&Math.abs(z+47)<4.8)continue;
+        if(chimneys.some(p=>Math.hypot(p[0]-x,p[2]-z)<1.4))continue;
+        if(rocks.some(({center,radii})=>Math.hypot(
+          (x-center[0])/(radii[0]*1.2+.45),(y-center[1])/(radii[1]*1.15+.45),(z-center[2])/(radii[2]*1.2+.45))<1))continue;
+        next.push([x,y,z]);
+      }
+      if(next.length!==target)return;
+    }
+    coins.splice(0,coins.length,...next);
+    resetCoins();
+    coinNote.textContent='Coins shuffled across all six dive sites';
+    try{localStorage.setItem(layoutKey,JSON.stringify(coins));}catch{}
+  }
+  document.querySelector('#shuffle').addEventListener('click',shuffleCoins);
+  function resetCoins(){
+    collected.clear();
+    resetBlocked.clear();
+    coins.forEach((point,i)=>{if(Math.hypot(...sub(point,eye))<=1.24)resetBlocked.add(i);});
+    try{localStorage.removeItem(saveKey);}catch{}
+    displayCoins();
+    coinNote.textContent='Coin hunt reset';
+    coinNote.hidden=false;
+    noteUntil=performance.now()*.001+2.35;
+  }
   function checkCoins(t){
     for(const [i,position] of coins.entries()){
-      if(collected.has(i)||Math.hypot(...sub(position,eye))>1.24)continue;
+      const distance=Math.hypot(...sub(position,eye));
+      if(distance>1.24){resetBlocked.delete(i);continue;}
+      if(collected.has(i)||resetBlocked.has(i))continue;
       collected.add(i);
       displayCoins();
       coinNote.textContent=collected.size===coins.length?'All coins recovered':'Coin recovered';
@@ -1083,6 +1127,13 @@ function ocean() {
     if(event.ctrlKey||event.altKey||event.metaKey)return;
     if(event.code==='KeyV'||(filmActive&&event.code==='Escape')){
       if(!event.repeat)filmToggle();
+      return;
+    }
+    if(event.code==='KeyR'||event.code==='KeyT'){
+      if(!event.repeat){
+        if(event.code==='KeyR')resetCoins();
+        else shuffleCoins();
+      }
       return;
     }
     if(event.code==='KeyM'){
