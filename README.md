@@ -20,7 +20,7 @@
 
 A looping flythrough through the kelp canyon, with a whale passing overhead. Click **Explore** or press **V** to fly freely. Move with **WASD / arrows**, rise or dive with **Space / C**, and drag to look around. Touchscreens get on-screen movement controls. Press **V** again to return to the flythrough. Each layout runs from one self-contained HTML file. Press **F** or click **Fullscreen** for browser fullscreen. The [Mini branch](https://github.com/triple6xseven/Akvarium/tree/mini) opens the fullscreen layout by default.
 
-<img src="screenshots/akvarium-mini.jpg" alt="Akvarium Mini fullscreen" width="720"> <img src="screenshots/akvarium-mini-9x16.jpg" alt="Akvarium Mini portrait, 9:16" width="260">
+<img src="screenshots/akvarium-mini.jpg" alt="Akvarium Mini fullscreen" width="720">
 
 ## Start a dive
 
